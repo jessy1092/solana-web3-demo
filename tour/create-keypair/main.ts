@@ -16,10 +16,12 @@ async function main() {
   // =========================================================
 
   // 如果你想要匯入到phantom, 可以透過以下方式拿到phantom的private格式
-  console.log(`private key for phantom:: ${bs58.encode(alice.secretKey)}`);
+  const bs58Encode = bs58.encode(alice.secretKey);
+
+  console.log(`private key for phantom:: ${bs58Encode}`);
 
   // 同樣的，如果你有phantom的私鑰，也能反向做bs58 decode來還原成 web3 js的keypair
-  let fromPhantom = Keypair.fromSecretKey(bs58.decode("5MaiiCavjCmn9Hs1o3eznqDEhRwxo7pXiAYez7keQUviUkauRiTMD8DrESdrNjN8zd9mTmVhRvBJeg5vhyvgrAhG"))
+  let fromPhantom = Keypair.fromSecretKey(bs58.decode(bs58Encode))
   console.log(`address from phantom private: ${fromPhantom.publicKey.toBase58()}`)
 }
 
